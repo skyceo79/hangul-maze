@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#2B2A5E">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>한글 미로</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="cv"></canvas>
+
+    <!-- 프로필 선택 -->
+    <section id="scr-profile" class="screen menu">
+      <div class="logo">
+        <canvas class="logo-art" width="320" height="120"></canvas>
+        <h1>한글 <span>미로</span></h1>
+        <p>자음과 모음을 차례대로 먹어서 단어를 만들어요!</p>
+      </div>
+      <h2 class="section-title">누가 할까요?</h2>
+      <div id="profile-list" class="profile-list"></div>
+    </section>
+
+    <!-- 단계 선택 -->
+    <section id="scr-home" class="screen menu">
+      <header class="topbar">
+        <button class="chip" id="btn-who"></button>
+        <div class="chip star-chip">⭐ <b id="home-stars">0</b></div>
+        <div class="spacer"></div>
+        <button class="chip" id="btn-settings">⚙️ 설정</button>
+      </header>
+      <h2 class="section-title">어떤 단계를 할까요?</h2>
+      <div id="stage-list" class="stage-list"></div>
+    </section>
+
+    <!-- 게임 -->
+    <section id="scr-game" class="screen game">
+      <div class="hud">
+        <div class="hud-left">
+          <button id="btn-pause" class="round-btn" aria-label="일시정지">⏸</button>
+          <div class="score">점수 <b id="hud-score">0</b></div>
+        </div>
+        <div id="hud-target" class="target"></div>
+        <div class="hud-right">
+          <div class="progress"><div id="hud-bar" class="bar"></div><span id="hud-count">1 / 20</span></div>
+          <button id="btn-peek" class="hint-btn">💡 글자 보기 <b id="hud-peeks">5</b></button>
+        </div>
+      </div>
+      <div id="pad" class="pad">
+        <span class="arr u">▲</span><span class="arr d">▼</span><span class="arr l">◀</span><span class="arr r">▶</span>
+        <span class="knob"></span>
+      </div>
+      <div class="edit-bar">
+        <p>방향키를 끌어서 원하는 곳에 놓아요</p>
+        <div class="row">
+          <button class="chip" id="edit-swap">↔ 좌우 바꾸기</button>
+          <button class="chip" id="edit-smaller">작게 −</button>
+          <button class="chip" id="edit-bigger">크게 +</button>
+          <button class="chip" id="edit-reset">처음대로</button>
+          <button class="chip primary" id="edit-done">완료 ✔</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 설정 -->
+    <section id="scr-settings" class="screen menu">
+      <header class="topbar">
+        <button class="chip" data-back="home">◀ 뒤로</button>
+        <h2 class="topbar-title">⚙️ 설정</h2>
+        <div class="spacer"></div>
+      </header>
+      <div class="settings">
+        <label class="setting"><span>🔊 효과음</span><input type="checkbox" id="set-sound"><i class="switch"></i></label>
+        <label class="setting"><span>🗣️ 글자 읽어 주기</span><input type="checkbox" id="set-voice"><i class="switch"></i></label>
+        <label class="setting"><span>✨ 반짝이 힌트<small>각 단계 1번, 2번 문제에서 다음 글자가 반짝여요</small></span><input type="checkbox" id="set-blink"><i class="switch"></i></label>
+        <button class="setting btn-row" id="set-layout"><span>🎮 방향키 위치 바꾸기</span><b>›</b></button>
+        <button class="setting btn-row" id="set-swap"><span>↔ 왼손잡이 / 오른손잡이 바꾸기</span><b>›</b></button>
+        <button class="setting btn-row danger" id="set-delete"><span>🗑️ 이 프로필 지우기</span><b>›</b></button>
+      </div>
+    </section>
+
+    <div id="modal" class="modal"><div id="modal-card" class="modal-card"></div></div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
