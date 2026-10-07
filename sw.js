@@ -1,5 +1,6 @@
 // 오프라인 실행용 캐시. 파일을 고치면 VERSION을 올린다.
-const VERSION = 'hangulmaze-v1';
+// 같은 주소(github.io)에 매스 갤러그도 있으니 내 캐시(hangulmaze-)만 지운다.
+const VERSION = 'hangulmaze-v2';
 const FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png',
@@ -11,7 +12,7 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('activate', (e) => {
-  e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
+  e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k.startsWith('hangulmaze-') && k !== VERSION).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
 });
 
 self.addEventListener('fetch', (e) => {
